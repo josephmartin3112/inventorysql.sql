@@ -1,0 +1,70 @@
+{
+    "database_name": "simple_company_db",
+    "collections": [
+        {
+            "name": "departments",
+            "validator": {
+                "bsonType": "object",
+                "required": ["dept_name"],
+                "properties": {
+                    "dept_name": {
+                        "bsonType": "string",
+                        "description": "Department name is required"
+                    },
+                    "location": {
+                        "bsonType": "string",
+                        "description": "Physical location of the department"
+                    }
+                }
+            },
+            "indexes": [
+                {
+                    "fields": {"dept_name": 1},
+                    "options": {"unique": true}
+                }
+            ]
+        },
+        {
+            "name": "employees",
+            "validator": {
+                "bsonType": "object",
+                "required": ["first_name", "last_name", "salary"],
+                "properties": {
+                    "first_name": {
+                        "bsonType": "string",
+                        "description": "First name is required"
+                    },
+                    "last_name": {
+                        "bsonType": "string", 
+                        "description": "Last name is required"
+                    },
+                    "email": {
+                        "bsonType": "string",
+                        "description": "Email address of the employee"
+                    },
+                    "phone_number": {
+                        "bsonType": "string",
+                        "description": "Contact phone number"
+                    },
+                    "salary": {
+                        "bsonType": "decimal",
+                        "description": "Employee salary is required"
+                    },
+                    "department_id": {
+                        "bsonType": "objectId",
+                        "description": "Reference to the department this employee belongs to"
+                    }
+                }
+            },
+            "indexes": [
+                {
+                    "fields": {"email": 1},
+                    "options": {"unique": true}
+                },
+                {
+                    "fields": {"department_id": 1}
+                }
+            ]
+        }
+    ]
+}
